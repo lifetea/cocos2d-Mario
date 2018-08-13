@@ -25,7 +25,7 @@ cc.Class({
 
     update: function (dt) {
         // 每帧判断和主角之间的距离是否小于收集距离
-        console.log(this.getPlayerDistance(),this.pickRadius)
+        // console.log(this.getPlayerDistance(),this.pickRadius)
         if (this.getPlayerDistance() < this.pickRadius) {
             // 调用收集行为
             this.onPicked();

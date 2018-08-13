@@ -29,10 +29,21 @@ cc.Class({
         scoreAudio: {
             default: null,
             type: cc.AudioClip
+        },
+        // 得分音效资源
+        bgAudio: {
+        default: null,
+        type: cc.AudioClip
         }
     },
 
+    playBgm: function() {
+	    cc.audioEngine.playEffect(this.bgAudio, true);
+    },
+
     onLoad: function () {
+        //播放背景音乐
+        this.playBgm()
         // 获取地平面的 y 轴坐标
         this.groundY = this.ground.y + this.ground.height/2;
         // 初始化计时器
@@ -72,11 +83,11 @@ cc.Class({
     update: function (dt) {
         // 每帧更新计时器，超过限度还没有生成新的星星
         // 就会调用游戏失败逻辑
-        if (this.timer > this.starDuration) {
-            this.gameOver();
-            this.enabled = false;   // disable gameOver logic to avoid load scene repeatedly
-            return;
-        }
+        // if (this.timer > this.starDuration) {
+        //     this.gameOver();
+        //     this.enabled = false;   // disable gameOver logic to avoid load scene repeatedly
+        //     return;
+        // }
         this.timer += dt;
     },
 

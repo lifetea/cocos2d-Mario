@@ -8,6 +8,8 @@ cc.Class({
         jumpDuration: 0,
         // 最大移动速度
         maxMoveSpeed: 0,
+        //speed
+        moveSpeed:0,
         // 加速度
         accel: 0,
         // 跳跃音效资源
