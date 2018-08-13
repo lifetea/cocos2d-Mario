@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "fb9cc804-1bc0-439a-a879-825c621b4f5d",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "superMarioMap": {
+      "ver": "1.0.3",
+      "uuid": "554bfcbb-b1f8-471e-a964-90436e5fd7de",
+      "rawTextureUuid": "fb9cc804-1bc0-439a-a879-825c621b4f5d",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 509,
+      "height": 509,
+      "rawWidth": 511,
+      "rawHeight": 511,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
