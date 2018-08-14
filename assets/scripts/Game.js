@@ -53,6 +53,7 @@ cc.Class({
         this.spawnNewStar();
         // 初始化计分
         this.score = 0;
+        console.log(this.node.width)
     },
 
     spawnNewStar: function() {

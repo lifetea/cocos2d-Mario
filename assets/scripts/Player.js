@@ -84,11 +84,12 @@ cc.Class({
     },    
 
     update: function (dt) {
+    	  // console.log('dt',dt)
         // 根据当前加速度方向每帧更新速度
         if (this.accLeft) {
-            this.xSpeed -= this.accel * dt;
+            this.xSpeed = -this.moveSpeed;//this.accel * dt;
         } else if (this.accRight) {
-            this.xSpeed += this.accel * dt;
+            this.xSpeed = this.moveSpeed//this.accel * dt;
         }
         // 限制主角的速度不能超过最大值
         if ( Math.abs(this.xSpeed) > this.maxMoveSpeed ) {
