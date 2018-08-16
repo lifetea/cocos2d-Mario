@@ -27,36 +27,40 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
-	    // player 节点，用于获取主角弹跳的高度，和控制主角行动开关
-	    player: {
-		    default: null,
-		    type: cc.Node
-	    }
+        // player 节点，用于获取主角弹跳的高度，和控制主角行动开关
+        player: {
+            default: null,
+            type: cc.Node
+        },
+        curMap: {
+            default:null,
+            type: cc.TiledMap
+        }
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () {
+        this.loadmap()
+    },
 
     start () {
-        // console.log(this.node.width)
-	    // var a = this.node.getComponent(cc.Camera).getCameraToWorldMatrix()
-	    // console.log(a)
-    }
-    // update (dt) {
-        // if(this.node.x <= (480/2.857))
-	    //    //    this.node.x += 1
-       //  if(this.player.x <= 16){
-       //      this.node.x = 0
-       //  }else {
-       //      this.node.x = this.player.x/2.857
-       //  }
-	    //
-	    // var followAction = cc.follow(this.player);
-	    // this.node.runAction(followAction);
-	    // this.node.x = this.player.x
-	    // console.log('play',this.player.x)
-	    // console.log('camera',this.node.position)
 
+    },
+    loadmap(){
+        console.log("loading");
+        var theMap = this.curMap.getComponent(cc.TiledMap);
+        var groups = theMap.getObjectGroups();
+        console.log(groups.length);
+        // console.log(theMap.allLayers());
+        // groups.forEach(function (t) {
+        //     console.log(t)
+        // })
+        // console.log(groups[0]);
+
+    },
+
+    // update (dt) {
+    //
     // },
 });
