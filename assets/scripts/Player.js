@@ -39,7 +39,7 @@ cc.Class({
         switch(event.keyCode) {
             case cc.macro.KEY.a:
                 this.accLeft = true;
-                this.moveSpeed = 200
+                this.moveSpeed = 60
                 this.isRun = true
                 this.direction = 'left'
                 console.log('left')
@@ -50,7 +50,7 @@ cc.Class({
                 break;    
             case cc.macro.KEY.d:
                 this.accRight = true;
-				this.moveSpeed = 200;
+				this.moveSpeed = 60;
                 this.isRun = true;
                 this.direction = 'right'
                 console.log('right')
@@ -76,14 +76,26 @@ cc.Class({
         }
     },
     start () {
-		let pos = this.pipLayer.getPositionAt(cc.v2(0, 0));
+		let pos = this.pipLayer.getPositionAt(cc.v2(28, 10));
 		cc.log("Pos: " + pos);
-		pos = this.pipLayer.getPositionAt(cc.v2(0, 13));
+		pos = this.pipLayer.getPositionAt(cc.v2(10, 11));
+		cc.log("Pos: " + pos);
+		let p = this.node.getPosition()
+		cc.log("Pos: " + p);
+		let tileGid = this.pipLayer.getTileGIDAt(28,10);
+		cc.log(tileGid)
+		tileGid = this.pipLayer.getTileGIDAt(0,10);
+		cc.log(tileGid)
+		cc.log("地图: " + this.map.node.position);
+		cc.log("人物: " + this.node.position);
+		// let size = this.xxxxxpipiLayer.getMapTileSize()
+		// cc.log(size)
+		// pos = this.pipLayer.getPositionAt(cc.v2(0, 13));
 
-		cc.log("Pos: " + pos);
-		pos = this.pipLayer.getPositionAt(cc.v2(0, 12));
-		cc.log("Pos: " + pos);
-		console.log(this.pipLayer.getPositionAt(0, 0))
+		// cc.log("Pos: " + pos);
+		// pos = this.pipLayer.getPositionAt(cc.v2(0, 12));
+		// cc.log("Pos: " + pos);
+		// console.log(this.pipLayer.getPositionAt(0, 0))
 		// if (this.pipLayer.getTileGIDAt(playerPosition)) {//tile不为空，返回
   //           cc.log('This way is blocked!');
   //       }
@@ -110,7 +122,35 @@ cc.Class({
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
     },
-     setJumpAction: function () {
+    //将英雄的坐标尺寸转化tile坐标
+	positionToTile () {
+		let pos = this.pipLayer.getPositionAt(cc.v2(28, 10));
+		cc.log("Pos: " + pos);
+		pos = this.pipLayer.getPositionAt(cc.v2(10, 11));
+		cc.log("Pos: " + pos);
+		cc.log("Node Position: " + this.map.node.position);
+		cc.log("地图: " + this.map.node.position.x);
+		cc.log("人物: " + this.node.position);
+		let relative = cc.v2((this.node.position.x-this.map.node.position.x),(112-this.node.y))
+		cc.log("相对: " + relative)
+		let x = parseInt(relative.x / 16)
+ 		let y= parseInt(relative.y / 16)
+ 		let tileP = cc.v2(x,y)
+ 		cc.log("tile里的坐标: " + tileP);
+
+ 		let tileVale = this.pipLayer.getTileGIDAt(tileP)
+ 		cc.log("tile是否为空: " + tileVale)
+ 		let tile = this.pipLayer.getTiledTileAt(tileP.x, tileP.y, true);
+ 		cc.log("tile.y: " + tile.y)
+ 		tile.y = tile.y - 1
+
+		cc.log(tile);
+ 		
+ 		return tileP
+
+	},
+
+    setJumpAction: function () {
         // 跳跃上升
         var jumpUp = cc.moveBy(this.jumpDuration, cc.v2(0, this.jumpHeight)).easing(cc.easeCubicActionOut());
         // 下落
@@ -184,6 +224,8 @@ cc.Class({
 
         if(this.isRun == true && this.isJump == false){
         	if(this.accRight == true){
+				this.positionToTile ()
+
 		        var name = this.animState != null ? this.animState.name: null;
 		        var playing = this.animState != null ?this.animState.isPlaying : false;
                 console.log('walk-right:',playing,name)
@@ -215,7 +257,7 @@ cc.Class({
         }else{
             var name = this.animState != null ? this.animState.name: null;
             var playing = this.animState != null ?this.animState.isPlaying : false;
-            if(name == "small-walk-right" || name == "samll-walk-left"){
+            if(name == "small-walk-right" || name == "small-walk-left"){
             	this.anim.stop(name)
             }
             if(this.accRight == true){
